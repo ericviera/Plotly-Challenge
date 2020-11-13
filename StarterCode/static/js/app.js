@@ -1,46 +1,65 @@
-//# Step 1: Plotly
+function Plots(id) {
+    // Fetch the JSON data
+    d3.json("data/samples.json").then(function (data) {
+        console.log(data);
+        const dataPromise = d3.json("data/samples.json");
+        console.log(dataPromise);
+        // -----------------------------------------------------------------
+        //Grab values from the data json object to build the plots
+        // filter the samples by ID
+        var samples = data.samples.filter(sample => sample.id === id)[0];
+        // Top 10 sample values for bar chart
+        var sampleVal = samples.sample_values.slice(0, 10).reverse();
+        // Top 10 otu_ids for bar chart
+        var otuids = (samples.otu_ids.slice(0, 10)).reverse(); 
+        // OTU label
+        var otu_ids = otuids.map(d => "OTU " + d)
+        // Top 10 labels
+        var labels = samples.otu_labels.slice(0, 10);
+        /* var washfreq = data.metadata.map(dta => dta.washfreq) */
+        // -----------------------------------------------------------------
+        //create trace and plot Bar Graph
+        var trace1 = {
+            x: sampleVal,
+            y: otu_ids,
+            text: labels,
+            type:"bar",
+            orientation: "h",
+        };
 
-//1. Use the D3 library to read in `samples.json`.
+        var data1 = [trace1];
 
-// Fetch the JSON data and console log it
-d3.json("Data/samples.json").then((data) => {
-  console.log(data);
-});
+        var layout = {
+            title: "Top 10 OTU",
+            yaxis:{
+                tickmode:"linear",
+            },
+            margin: {
+                l: 100,
+                r: 100,
+                t: 30,
+                b: 20
+            }
+        };
+        Plotly.newPlot("bar", data1, layout);
+        // -----------------------------------------------------------------
 
-// Promise Pending
-const dataPromise = d3.json("Data/samples.json");
-console.log("Data Promise: ", dataPromise);
+    });
+};
+// -------------------------------------------------------------------------
+// create the function for the change event
+function optionChanged(id) {
+    Plots(id);
 
+}
+// -------------------------------------------------------------------------
+// Initial Data Render
+function init() {
+    // Read Data
+    d3.json("data/samples.json").then((data)=> {
+        // call the functions to display the data and the plots to the page
+        Plots(data.names[0]);
+    });
+}
 
-//2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
-//* Use `sample_values` as the values for the bar chart.
-//* Use `otu_ids` as the labels for the bar chart.
-//* Use `otu_labels` as the hovertext for the chart.
-
-
-
-
-
-//3. Create a bubble chart that displays each sample.
-
-//* Use `otu_ids` for the x values.
-
-//* Use `sample_values` for the y values.
-
-//* Use `sample_values` for the marker size.
-
-//* Use `otu_ids` for the marker colors.
-
-//* Use `otu_labels` for the text values.
-
-
-
-//4. Display the sample metadata, i.e., an individual's demographic information.
-
-//5. Display each key-value pair from the metadata JSON object somewhere on the page.
-
-
-
-//6. Update all of the plots any time that a new sample is selected.
-
-//Additionally, you are welcome to create any layout that you would like for your dashboard.
+init();
