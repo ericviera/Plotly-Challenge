@@ -106,6 +106,27 @@ function Plots(id) {
         // -----------------------------------------------------------------
     });
 };
+
+// -------------------------------------------------------------------------
+// create the function to get the necessary data
+function Demographics(id) {
+    /// Fetch the JSON data
+    d3.json("data/samples.json").then((data)=> {
+        var metadata = data.metadata;
+        // Filter by ID
+        var result = metadata.filter(meta => meta.id.toString() === id)[0];
+        // Grab HTML element
+        var demographicInfo = d3.select("#sample-metadata");
+        // Wipe data
+        demographicInfo.html("");
+        // Grab data and append to required fields
+        Object.entries(result).forEach((key) => {   
+                demographicInfo.append("h5").text(key[0].toUpperCase() + ": " + key[1] + "\n");    
+        });
+    });
+};
+// -------------------------------------------------------------------------
+
 // -------------------------------------------------------------------------
 // create the function for the change event
 function optionChanged(id) {
