@@ -87,13 +87,13 @@ function Plots(id) {
                         tickmode:"array"
                     },
                     steps: [ 
-                    { range: [0, 1], color: "lightgray" },
-                    { range: [1, 2], color: "lightgray" },
-                    { range: [2, 3], color: "gray" },
-                    { range: [3, 4], color: "gray" },
-                    { range: [4, 5], color: "gray" },
+                    { range: [0, 1], color: "red" },
+                    { range: [1, 2], color: "lightred" },
+                    { range: [2, 3], color: "red-orange" },
+                    { range: [3, 4], color: "orange" },
+                    { range: [4, 5], color: "orange" },
                     { range: [5, 6], color: "yellow" },
-                    { range: [6, 7], color: "orange" },
+                    { range: [6, 7], color: "yellow-green" },
                     { range: [7, 8], color: "lightgreen" },
                     { range: [8, 9], color: "green" }
                     ],
