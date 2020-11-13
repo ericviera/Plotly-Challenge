@@ -63,6 +63,47 @@ function Plots(id) {
         };
 
         Plotly.newPlot("bubble", data2, layout); 
+        // -----------------------------------------------------------------
+        // create trace and plot Pie Chart
+        var trace3 = {
+            labels: otu_ids,
+            values:sampleVal,
+            type:"pie",
+        }
+        var data3 = [trace3] 
+
+        Plotly.newPlot("gauge", data3);
+        // -----------------------------------------------------------------
+        // create trace and plot Guage
+/*         var data = [
+            {
+                domain: { x: [0, 1], y: [0, 1] },
+                value: washfreq,
+                title: { text: "Belly Button Washing Frequency" },
+                type: "indicator",
+                mode: "gauge+number",
+                gauge: {
+                    axis: {range: [0,9],
+                        tickmode:"array"
+                    },
+                    steps: [ 
+                    { range: [0, 1], color: "lightgray" },
+                    { range: [1, 2], color: "lightgray" },
+                    { range: [2, 3], color: "gray" },
+                    { range: [3, 4], color: "gray" },
+                    { range: [4, 5], color: "gray" },
+                    { range: [5, 6], color: "yellow" },
+                    { range: [6, 7], color: "orange" },
+                    { range: [7, 8], color: "lightgreen" },
+                    { range: [8, 9], color: "green" }
+                    ],
+
+                }
+            }
+        ];
+        var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+        Plotly.newPlot("gauge", data, layout); */
+        // -----------------------------------------------------------------
     });
 };
 // -------------------------------------------------------------------------
